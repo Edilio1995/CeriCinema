@@ -1,22 +1,17 @@
 <!DOCTYPE html>
 <html>
-	<head>
-	  <%@  page import="Utils.userBeans"%>
-	  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-	  <meta http-equiv="refresh" content="60" />
-	  <script src="themes/1/js-image-slider.js" type="text/javascript"></script>
-	  <style>
-	    @import url(style.css);
-	    @import url(themes/1/js-image-slider.css)
-	  </style>
-	  <title>Cericinema</title>
-	</head>
-	<body onload="caricaFilm()">
+<head>
+<%@  page import="Utils.userBeans"%>
+  <meta charset="UTF-8">
+  <style>
+    @import url(style.css);
+  </style>
+  <title>Cericinema - Lista film</title>
+</head>
+<body onload="caricaFilm()">
 	  <header>
 	    <a href="index.jsp">
-	   		<center>
-	   			<img width="200px" src="img/PC-HUNT.png">
-	   		</center>
+	   		<center><img width="200px" src="img/PC-HUNT.png"></center>
 	    </a>
 	  </header>
 		<ul id="menu">
@@ -58,26 +53,18 @@
 	    			}
 	    		</script>
 	    	</div>
-	   </li>
-	 </ul>
-
-		<%if(request.getAttribute("msg")!=null){%>
+	    	</form>
+	 </ul>  	
+  		<%!int i; int n=0;%>
+  		
+  		<%if(request.getAttribute("msg")!=null){%>
 			<div id="avviso"><%=request.getAttribute("msg")%></div>
 			<%}%>
-
-	<div id="content">
-		<div id="sliderFrame">
-	        <div id="slider">
-	            <a href="lista_film.jsp"><img src="img/slider_mammaopapa.png"/></a>
-	            <a href="lista_film.jsp"><img src="img/slider_ora_legale.png"/></a>
-	            <a href="lista_film.jsp"><img src="img/legobatman.png"/></a>
-	        </div>
-	        <div id="htmlcaption" style="display: none;">
-	            <em>HTML</em> caption. Link to <a href="http://www.google.com/">Google</a>.
-	        </div>
-	    </div>
-	</div>
-	<footer>
+  		
+  		<table id="prodotti">
+  		
+ 		</table>
+  <footer>
 	  <div id="copyright">
 	    <p>Design Copyright © Ildo Tiberio. All rights reserved.</p>
 	  </div>
@@ -87,9 +74,8 @@
 	  	</svg>
 	  </div>
 	</footer>
-		<script>
-		
-		function caricaFilm() 
+  		<script>
+  		function caricaFilm() 
 		{
 			  var xhttp = new XMLHttpRequest();
 			  xhttp.onreadystatechange = function() {
@@ -99,12 +85,9 @@
 				};
 				xhttp.open("POST", "CaricaFilmIndex", true);
 				xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-				xhttp.send("mex="+document.getElementById("admin").value);
+				xhttp.send("mex="+document.getElementById("ricerca").value);
 		}
-
-
-
-				function Ricerca() {
+  		function Ricerca() {
 					  var xhttp = new XMLHttpRequest();
 					  xhttp.onreadystatechange = function() {
 						  if (xhttp.readyState == 4 && xhttp.status == 200) {
@@ -115,6 +98,6 @@
 						xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 						xhttp.send("mex="+document.getElementById("ricerca").value);
 				}
-		</script>
+  		</script>
 	</body>
 </html>

@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<%@  page import="Utils.Carrello"%>
+	<%@  page import="Utils.userBeans"%>
 		<meta charset="UTF-8">
 		<style>
 			@import url(style.css);
 		</style>
-		<title>Cirecinema - Registrazione</title>
+		<title>Cericinema - Registrazione</title>
 	</head>
 	<body>
 	  <header>
@@ -14,37 +14,37 @@
 	   		<center><img width="200px" src="img/PC-HUNT.png"></center>
 	    </a>
 	  </header>
-	  <jsp:useBean id="carrello" scope="session" class="Utils.Carrello"/>
-	  <jsp:useBean id="userB" scope="session" class="Utils.userBeans"/>
+	  
 		<ul id="menu">
 		    <li><a class="menu" href="index.jsp">Home</a></li>
 		    <li><a class="menu" href="lista_film.jsp">Lista film</a></li>
 				<li> <a id = "tendina" class="menu">Categoria</a>
 					<ul>
-						<li><a href="ilmioaccount.jsp">Animazione</a></li>
-						<li><a href="imieiacquisti.jsp">Avventura</a></li>
-						<li><a href="imieiacquisti.jsp">Azione</a></li>
-						<li><a href="imieiacquisti.jsp">Commedia</a></li>
-						<li><a href="imieiacquisti.jsp">Drammatico</a></li>
-						<li><a href="imieiacquisti.jsp">Fantascienza</a></li>
-						<li><a href="imieiacquisti.jsp">Horror</a></li>
-						<li><a href="imieiacquisti.jsp">Thriller</a></li>
+						<li><a href="filmAnimazione.jsp">Animazione</a></li>
+						<li><a href="filmAvventura.jsp">Avventura</a></li>
+						<li><a href="filmAzione.jsp">Azione</a></li>
+						<li><a href="filmCommedia.jsp">Commedia</a></li>
+						<li><a href="filmFantascienza.jsp">Fantascienza</a></li>
+						<li><a href="filmHorror.jsp">Horror</a></li>
+						<li><a href="filmThriller.jsp">Thriller</a></li>
 					</ul>
 				</li>
 		    <li><a class="menu" href="contatti.jsp">Contatti</a></li>
 		    <li><a class="menu" href="registrazione.jsp">Registrazione</a></li>
 		   <li><div id="car">
 		    	<form>
-					<%	Object utente = session.getAttribute("user");
-						if(utente == null)
-						{%>
+					<%	
+					userBeans utente = (userBeans) session.getAttribute("user");
+					if(utente==null)
+					{%>
 						<button type="submit" formaction="login.jsp" >Accedi</button>
-						<%}
-						else
-						{%>
-						<button type="button">Esci</button>
-						<%} %>
-	    		<input placeholder="Cerca" id="ricerca" type="search"/>
+					<%}
+					else
+					{%>
+						<button type="submit" formaction="Logout" >Esci</button>
+					<%}%>
+	    			<input placeholder="Cerca" id="ricerca" type="search"/>
+	    		</form>
 	    		<script>
 	    			var txt = document.getElementById("ricerca");
 	    			txt.onkeydown = function(e){
@@ -65,26 +65,21 @@
 							<tr>
 								<td colsplan="2">
 									<div id="reg1">
-										Nome:<br> <input type="text" id="nome" name="nome" value="" onblur="nomefocus()"><br>
-										Cognome:<br> <input type="text" id="cognome" name="cognome"value="" onblur="cognomefocus()"><br> 
+										Nome:<br> <input type="text" id="nome" name="nome" maxlength="25" value="" onblur="nomefocus()"><br>
+										Cognome:<br> <input type="text" id="cognome" name="cognome"value="" maxlength="30" onblur="cognomefocus()"><br> 
+										Email: <br> <input type="text" id="email" name="email" maxlength="50" onblur="emailfocus()"><br>
 										Data di Nascita:<br> <input type="text" id="dataDiNascita" name="dataDiNascita" maxlength="10" value="" onblur="datafocus()"><br>
 										Residenza:<br> <input type="text" id="residenza" name="residenza" value="" onblur="residenzafocus()"><br> 
-										CAP:<br> <input type="text" id="cap" name="cap" value="" onblur="capfocus()"><br>
+										CAP:<br> <input type="text" id="cap" name="cap" value="" maxlength="5" onblur="capfocus()"><br>
 										Codice Fiscale:<br> <input type="text" id="codiceFiscale" name="codiceFiscale" maxlength="16" value="" onblur="cffocus()"><br>
-										Username:<br> <input type="text" id="username" name="username" value="" onblur="userfocus()"><br> 
-										Password:<br> <input type="password" id="password" name="password" value="" onblur="passfocus()"><br>
+										Username:<br> <input type="text" id="username" name="username" maxlength="15" value="" onblur="userfocus()"><br> 
+										Password:<br> <input type="password" id="password" name="password" maxlength="30" value="" onblur="passfocus()"><br>
 										Ripeti password:<br> <input type="password" id="password2" name="password2" value="" onblur="pass2focus()"><br>
 									</div>
 								</td>
 								<td>
 									<div id="reg2">
-										<input type="radio" name="pagamento" value="bonificoBancario" onclick="visible(1)" checked>Bonifico bancario<br>
-										Codice IBAN:<br> <input type="text" id="codiceIBAN" name="codiceIBAN" maxlength="27" value="" onblur="ibanfocus()"><br>
-										<br> <input type="radio" name="pagamento" value="cartaDiCredito" onclick="visible(2)">Carta di credito<br> 
-										Numero carta:<br> <input type="text" id="numeroCarta" name="numeroCarta" value="" style="visibility: hidden" onblur="numfocus()"><br> 
-										Codice CVV:<br> <input type="password" id="codiceCVV" maxlength="3" name="codiceCVV" value="" style="visibility: hidden" onblur="codicefocus()"><br>
-										Scadenza carta:<br> <input type="text" id="scadenzaCarta" name="scadenzaCarta" value="" style="visibility: hidden" onblur="scadenzafocus()"><br>
-										<br> <input type="submit" name="Invia" onclick="registra()">
+									<br> <input type="submit" name="Invia" value="   Invia   "onclick="registra()">
 									</div>
 								</td>
 							</tr>
@@ -93,14 +88,14 @@
 			</tr>
 			</table>
 			<footer>
-				<div id="copyright">
-					<p>Copyright Â© Ildo Tiberio. All rights reserved.</p>
-				</div>
-				<div id="svg">
-					<svg height="10" width="0">
-		    <img src="img/PC-HUNT_logo.svg" height="50" width="80">
-		  </svg>
-				</div>
+			  <div id="copyright">
+			    <p>Design Copyright © Ildo Tiberio. All rights reserved.</p>
+			  </div>
+			  <div id="svg">
+			  	<svg height="10" width="0">
+			    	<img src="img/PC-HUNT_logo.svg" height="50" width="80">
+			  	</svg>
+			  </div>
 			</footer>
 			<script>
 				  function visible(id){
@@ -140,6 +135,20 @@
 					  else
 						  {
 						 	 document.getElementById("nome").style.borderColor = none;
+						  }
+				  }
+				  
+
+				  function emailfocus()
+				  {
+					  if (document.getElementById("email").value == "")
+						{
+							document.getElementById("email").style.borderColor = "red";
+							document.getElementById("email").value = "";
+						}
+					  else
+						  {
+						 	 document.getElementById("email").style.borderColor = none;
 						  }
 				  }
 				  

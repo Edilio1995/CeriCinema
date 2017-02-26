@@ -4,14 +4,12 @@
 	  <%@  page import="Utils.userBeans"%>
 	  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 	  <meta http-equiv="refresh" content="60" />
-	  <script src="themes/1/js-image-slider.js" type="text/javascript"></script>
 	  <style>
 	    @import url(style.css);
-	    @import url(themes/1/js-image-slider.css)
 	  </style>
-	  <title>Cericinema</title>
+	  <title>Cericinema - Film Fantascienza</title>
 	</head>
-	<body onload="caricaFilm()">
+	<body onload="carica()">
 	  <header>
 	    <a href="index.jsp">
 	   		<center>
@@ -58,6 +56,7 @@
 	    			}
 	    		</script>
 	    	</div>
+	    	</form>
 	   </li>
 	 </ul>
 
@@ -66,16 +65,7 @@
 			<%}%>
 
 	<div id="content">
-		<div id="sliderFrame">
-	        <div id="slider">
-	            <a href="lista_film.jsp"><img src="img/slider_mammaopapa.png"/></a>
-	            <a href="lista_film.jsp"><img src="img/slider_ora_legale.png"/></a>
-	            <a href="lista_film.jsp"><img src="img/legobatman.png"/></a>
-	        </div>
-	        <div id="htmlcaption" style="display: none;">
-	            <em>HTML</em> caption. Link to <a href="http://www.google.com/">Google</a>.
-	        </div>
-	    </div>
+		<table id="prodotti"></table>
 	</div>
 	<footer>
 	  <div id="copyright">
@@ -88,22 +78,71 @@
 	  </div>
 	</footer>
 		<script>
-		
-		function caricaFilm() 
-		{
-			  var xhttp = new XMLHttpRequest();
-			  xhttp.onreadystatechange = function() {
-				  if (xhttp.readyState == 4 && xhttp.status == 200) {
-				    document.getElementById("prodotti").innerHTML = xhttp.responseText;
-				  }
-				};
-				xhttp.open("POST", "CaricaFilmIndex", true);
-				xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-				xhttp.send("mex="+document.getElementById("admin").value);
-		}
+		/*		function loadXMLDoc()
+				{
+				  var xmlhttp = new XMLHttpRequest();
+				  xmlhttp.onreadystatechange = function()
+				  {
+				    if (xmlhttp.readyState == 4 && xmlhttp.status == 200)
+				    {
+				      myFunction(xmlhttp);
+				    }
+				  };
+				  xmlhttp.open("GET", "pc_catalog.xml", true);
+				  xmlhttp.send();
+				}
 
+				loadXMLDoc();
 
+				function myFunction(xml)
+				{
+				  var i;
+				  var j=0;
+				  var xmlDoc = xml.responseXML;
+				  var table="";
+				  var x = xmlDoc.getElementsByTagName("PC");
+				  table += "<tr>";
+				  for (i = 0; i <x.length; i++)
+				  {
+						table += "<td> <form method='post' action='DettagliProdotto'>" +
+						'<button class="foto_prodotto" id="btn_index" type="submit"> <img src="' + x[i].getElementsByTagName("PIC")[0].childNodes[0].nodeValue + '" width="200" height="200" align="center">' +
+					//	"</button>" +
+						"<input type='text' name='id' hidden value='" + x[i].getElementsByTagName("ID")[0].childNodes[0].nodeValue + "'><br>";
+						table +=
+						"<h3> <a class = 'prodotto'" + x[i].getElementsByTagName("ID")[0].childNodes[0].nodeValue + "'>"
+						+ x[i].getElementsByTagName("NAME")[0].childNodes[0].nodeValue + "</a></h3>" +
+						"</button></form><br>"+
+						"<b>CPU:</b>" + x[i].getElementsByTagName("CPU")[0].childNodes[0].nodeValue +
+						"<br>"+
+						"<b>RAM:</b>" + x[i].getElementsByTagName("RAM")[0].childNodes[0].nodeValue +
+						"<br>"+
+						"<b>GPU:</b>" + x[i].getElementsByTagName("GPU")[0].childNodes[0].nodeValue +
+						"<br>"+
+						"<b>HDD:</b>" + x[i].getElementsByTagName("HDD")[0].childNodes[0].nodeValue +
+						"<br>"+
+						"<b>PREZZO:</b>" + x[i].getElementsByTagName("PREZZO")[0].childNodes[0].nodeValue +
+						"&#8364</td>";
+						if(i+1==j+3)
+						{
+							j+=3;
+							table += "</tr><tr>";
+						}
+				   }
+				   table += "</tr>";
+				   document.getElementById("prodotti").innerHTML = table;
+				}*/
 
+				function carica() {
+					  var xhttp = new XMLHttpRequest();
+					  xhttp.onreadystatechange = function() {
+						  if (xhttp.readyState == 4 && xhttp.status == 200) {
+						    document.getElementById("prodotti").innerHTML = xhttp.responseText;
+						  }
+						};
+						xhttp.open("POST", "MostraDati", true);
+						xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+						xhttp.send("mex="+"fantascienza");
+				}
 				function Ricerca() {
 					  var xhttp = new XMLHttpRequest();
 					  xhttp.onreadystatechange = function() {

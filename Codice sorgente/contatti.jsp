@@ -1,22 +1,17 @@
 <!DOCTYPE html>
 <html>
-	<head>
-	  <%@  page import="Utils.userBeans"%>
-	  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-	  <meta http-equiv="refresh" content="60" />
-	  <script src="themes/1/js-image-slider.js" type="text/javascript"></script>
-	  <style>
-	    @import url(style.css);
-	    @import url(themes/1/js-image-slider.css)
-	  </style>
-	  <title>Cericinema</title>
-	</head>
-	<body onload="caricaFilm()">
+<head>
+<%@  page import="Utils.userBeans"%>
+  <meta charset="UTF-8">
+  <style>
+    @import url(style.css);
+  </style>
+  <title>Cericinema - Contatti</title>
+</head>
+<body>
 	  <header>
 	    <a href="index.jsp">
-	   		<center>
-	   			<img width="200px" src="img/PC-HUNT.png">
-	   		</center>
+	   		<center><img width="200px" src="img/PC-HUNT.png"></center>
 	    </a>
 	  </header>
 		<ul id="menu">
@@ -49,37 +44,69 @@
 					<%}%>
 	    			<input placeholder="Cerca" id="ricerca" type="search"/>
 	    		</form>
-	    		<script>
-	    			var txt = document.getElementById("ricerca");
-	    			txt.onkeydown = function(e){
-	    				if(e.keyCode==13){
-	    					Ricerca();
-	    				}
-	    			}
-	    		</script>
-	    	</div>
-	   </li>
+		    		<script>
+		    			var txt = document.getElementById("ricerca");
+		    			txt.onkeydown = function(e){
+		    				if(e.keyCode==13){
+		    					Ricerca();
+		    				}
+		    			}
+		    		</script>
+	    			</div>
+	    		</form>
 	 </ul>
 
-		<%if(request.getAttribute("msg")!=null){%>
+  		<%!int i; int n=0;%>
+
+  		<%if(request.getAttribute("msg")!=null){%>
 			<div id="avviso"><%=request.getAttribute("msg")%></div>
 			<%}%>
 
-	<div id="content">
-		<div id="sliderFrame">
-	        <div id="slider">
-	            <a href="lista_film.jsp"><img src="img/slider_mammaopapa.png"/></a>
-	            <a href="lista_film.jsp"><img src="img/slider_ora_legale.png"/></a>
-	            <a href="lista_film.jsp"><img src="img/legobatman.png"/></a>
-	        </div>
-	        <div id="htmlcaption" style="display: none;">
-	            <em>HTML</em> caption. Link to <a href="http://www.google.com/">Google</a>.
-	        </div>
-	    </div>
-	</div>
-	<footer>
+	<table id="prodotti">
+    <tr>
+      <td>
+        Telefono:
+      </td>
+      <td>
+        08234949494
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Fax:
+      </td>
+      <td>
+        0823494949
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Indirizzo email:
+      </td>
+      <td>
+        cericinema@gmail.com
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Indirizzo sede principale
+      </td>
+      <td>
+        Caserta - Via Municipio 123
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Indirizzio filiale:
+      </td>
+      <td>
+        Roma - Via Caserta 12
+      </td>
+    </tr>
+  </table>
+  <footer>
 	  <div id="copyright">
-	    <p>Design Copyright © Ildo Tiberio. All rights reserved.</p>
+	    <p>Design Copyright Â© Ildo Tiberio. All rights reserved.</p>
 	  </div>
 	  <div id="svg">
 	  	<svg height="10" width="0">
@@ -87,24 +114,8 @@
 	  	</svg>
 	  </div>
 	</footer>
-		<script>
-		
-		function caricaFilm() 
-		{
-			  var xhttp = new XMLHttpRequest();
-			  xhttp.onreadystatechange = function() {
-				  if (xhttp.readyState == 4 && xhttp.status == 200) {
-				    document.getElementById("prodotti").innerHTML = xhttp.responseText;
-				  }
-				};
-				xhttp.open("POST", "CaricaFilmIndex", true);
-				xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-				xhttp.send("mex="+document.getElementById("admin").value);
-		}
-
-
-
-				function Ricerca() {
+  		<script>
+  		function Ricerca() {
 					  var xhttp = new XMLHttpRequest();
 					  xhttp.onreadystatechange = function() {
 						  if (xhttp.readyState == 4 && xhttp.status == 200) {
@@ -115,6 +126,6 @@
 						xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 						xhttp.send("mex="+document.getElementById("ricerca").value);
 				}
-		</script>
+  		</script>
 	</body>
 </html>
